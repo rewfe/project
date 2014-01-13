@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="book.web" basedir="." default="postclean">
+	<property name="src" location="src" />
+	<property name="temp" location="temp" />
+	<property name="dist" location="dist" />
+
+	<path id="class.path">
+		<fileset dir="WebContent/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<target name="clean">
+		<delete dir="${temp}" />
+		<delete dir="${dist}" />
+	</target>
+
+	<target name="init" depends="clean">
+		<mkdir dir="${temp}/WEB-INF/lib" />
+		<mkdir dir="${temp}/WEB-INF/classes" />
+		<mkdir dir="${dist}" />
+	</target>
+
+	<target name="compile" depends="init" description="compile the source ">
+		<javac classpathref="class.path" srcdir="${src}" destdir="${temp}/WEB-INF/classes" encoding="utf8" compiler="modern" target="1.5" />
+	</target>
+
+
+	<target name="content" depends="compile" description="copy content">
+		<copy todir="${temp}">
+			<fileset dir="WebContent" />
+		</copy>
+		<copy todir="${temp}/WEB-INF/classes">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+		<buildnumber file=".buildnumber" />
+		<tstamp />
+	</target>
+
+	<target name="distrib" depends="content" description="create war file">
+		<war destfile="${dist}/hay.war" basedir="${temp}">
+			<manifest>
+				<attribute name="author" value="PMiK" />
+				<attribute name="build" value="${build.number}" />
+				<attribute name="date" value="${TODAY}" />
+			</manifest>
+		</war>
+	</target>
+	<target name="javadoc" depends="distrib">
+		<!--javadoc access="package" author="true" classpathref="class.path" destdir="${dist}/javadoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.6" sourcepath="${src}" splitindex="true" use="true" version="true" /-->
+	</target>
+	<target name="postclean" depends="javadoc" description="clean temp dir">
+		<delete dir="${temp}" />
+	</target>
+</project>

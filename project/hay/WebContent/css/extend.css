@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+
+TABLE.infoTable {
+	width: 100%;
+}
+
+TABLE.infoTable TD:FIRST-CHILD {
+	width: 100px;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+.even {
+	background-color: gray;
+}
+
+.odd {
+	background-color: gray;
+}
+
+TD.section {
+	padding-top: 7px;
+}
+
+TABLE.list {
+	width: 100%;
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-collapse: collapse;
+}
+
+TABLE.list TD {
+	padding-right: 10px;
+}
+
+TABLE.list TD:FIRST-CHILD {
+	padding-left: 10px;
+}
+
+TABLE.list TR {
+	white-space: nowrap;
+}
+
+TABLE.list TR:HOVER {
+	background-color: gray;
+}
+
+TABLE.list THEAD TR,TABLE.list THEAD TR:HOVER {
+	background-color: gray;
+	border-bottom-style: solid;
+	border-bottom-color: gray;
+	border-bottom-width: 1px;
+}
+
+A.notread {
+	font-weight: bold;
+}

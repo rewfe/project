@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="hay" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>hay</display-name>
+	
+	<jsp-config>
+		<jsp-property-group>
+			<description>Вставка в начало всех указанных jsp данных из prelude.jspf</description>
+			<url-pattern>/WEB-INF/jsp/*</url-pattern>
+			<include-prelude>/WEB-INF/include/prelude.jspf</include-prelude>
+		</jsp-property-group>
+	</jsp-config>
+	
+	<context-param>
+		<description>Локализация сайта</description>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>my.sample.i18n.hay</param-value>
+	</context-param>
+	
+	<listener>
+		<description>Инициализирует переменные контекста.</description>
+		<listener-class>my.sample.listener.Initialiser</listener-class>
+	</listener>
+
+	<filter>
+		<description>
+		Фильтр отвечает за то, чтобы все принятые параметры были в кодировке utf-8.  
+		</description>
+		<display-name>Utf8Filter</display-name>
+		<filter-name>Utf8Filter</filter-name>
+		<filter-class>my.sample.filter.Utf8Filter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Utf8Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<filter>
+		<description>
+		Фильтр отвечает за доступ пользователя к зонам сайта. Настройки в security-config.xml.
+		</description>
+		<display-name>AuthorizationFilter</display-name>
+		<filter-name>AuthorizationFilter</filter-name>
+		<filter-class>my.sample.filter.AuthorizationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthorizationFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+
+	<servlet>
+		<description>
+		Для идентификации пользователей, заставляет браузер вывести окошко для ввода логина и пароля.
+		</description>
+		<display-name>Login</display-name>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>my.sample.servlet.Login</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Отвечает за создание новостей, которые потом видны на главной странице.
+		</description>
+		<display-name>CreateNews</display-name>
+		<servlet-name>CreateNews</servlet-name>
+		<servlet-class>my.sample.servlet.CreateNews</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateNews</servlet-name>
+		<url-pattern>/create-news.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>
+		Отвечает за редактирование новостей, которые потом видны на главной странице.
+		</description>
+		<display-name>EditNews</display-name>
+		<servlet-name>EditNews</servlet-name>
+		<servlet-class>my.sample.servlet.EditNews</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditNews</servlet-name>
+		<url-pattern>/edit-news.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>
+		Отвечает за удаление новостей, которые потом видны на главной странице.
+		</description>
+		<display-name>DeleteNews</display-name>
+		<servlet-name>DeleteNews</servlet-name>
+		<servlet-class>my.sample.servlet.DeleteNews</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteNews</servlet-name>
+		<url-pattern>/delete-news.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>
+		Отвечает за создание новостей, которые потом видны на главной странице.
+		</description>
+		<display-name>CreateMail</display-name>
+		<servlet-name>CreateMail</servlet-name>
+		<servlet-class>my.sample.servlet.CreateMail</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateMail</servlet-name>
+		<url-pattern>/create-mail.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Отвечает за публикацию сообщений которые потом видны на странице общаг.
+		</description>
+		<display-name>CreateNote</display-name>
+		<servlet-name>CreateNote</servlet-name>
+		<servlet-class>my.sample.servlet.CreateNote</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateNote</servlet-name>
+		<url-pattern>/create-note.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Отвечает за выход пользователя из системы. Уничтожает сессию пользователя.
+		</description>
+		<display-name>Logout</display-name>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>my.sample.servlet.Logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/logout.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>
+		Информация о том что пользователь забанен.
+		</description>
+		<display-name>DamnedInfo</display-name>
+		<servlet-name>DamnedInfo</servlet-name>
+		<servlet-class>my.sample.servlet.DamnedInfo</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DamnedInfo</servlet-name>
+		<url-pattern>/damned-info.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Позволяет пользователю управлять своей учётной записью. Менять пароль, настройки и другое.
+		</description>
+		<display-name>UserRoom</display-name>
+		<servlet-name>UserRoom</servlet-name>
+		<servlet-class>my.sample.servlet.UserRoom</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserRoom</servlet-name>
+		<url-pattern>/user-room.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Отображает информацию о пользователе. Так же позволяет отправить пользователю личное сообщение. 
+		</description>
+		<display-name>UserInfo</display-name>
+		<servlet-name>UserInfo</servlet-name>
+		<servlet-class>my.sample.servlet.UserInfo</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserInfo</servlet-name>
+		<url-pattern>/user-info.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>
+		Отображает информацию о пользователе. Так же позволяет отправить пользователю личное сообщение. 
+		</description>
+		<display-name>ShowMail</display-name>
+		<servlet-name>ShowMail</servlet-name>
+		<servlet-class>my.sample.servlet.ShowMail</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowMail</servlet-name>
+		<url-pattern>/show-mail.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Список пользователей системы.
+		</description>
+		<display-name>UserList</display-name>
+		<servlet-name>UserList</servlet-name>
+		<servlet-class>my.sample.servlet.UserList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserList</servlet-name>
+		<url-pattern>/user-list.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Отображает личные сообщения которые пришли пользователю.
+		</description>
+		<display-name>MailList</display-name>
+		<servlet-name>MailList</servlet-name>
+		<servlet-class>my.sample.servlet.MailList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MailList</servlet-name>
+		<url-pattern>/mail-list.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Отображает публичные сообщения пользователей.
+		</description>
+		<display-name>PublicRoom</display-name>
+		<servlet-name>PublicRoom</servlet-name>
+		<servlet-class>my.sample.servlet.PublicRoom</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PublicRoom</servlet-name>
+		<url-pattern>/public-room.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Отображает новости.
+		</description>
+		<display-name>Main</display-name>
+		<servlet-name>Main</servlet-name>
+		<servlet-class>my.sample.servlet.Main</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Main</servlet-name>
+		<url-pattern>/main.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		позволяет пользователю зарегестрироваться в системе.
+		</description>
+		<display-name>Registration</display-name>
+		<servlet-name>Registration</servlet-name>
+		<servlet-class>my.sample.servlet.Registration</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Registration</servlet-name>
+		<url-pattern>/registration.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>
+		Позволяет редактировать данные пользователя.
+		</description>
+		<display-name>EditUser</display-name>
+		<servlet-name>EditUser</servlet-name>
+		<servlet-class>my.sample.servlet.EditUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditUser</servlet-name>
+		<url-pattern>/edit-user.html</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
+		<error-code>401</error-code>
+		<location>/WEB-INF/jsp/error/401.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/jsp/error/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/jsp/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/jsp/error/500.jsp</location>
+	</error-page>
+</web-app>

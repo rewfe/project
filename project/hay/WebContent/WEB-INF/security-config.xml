@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "//UNKNOWN/" "security-config.dtd">
+<map>
+	<action path="/registration.html">		
+		<role name="guest"/>
+	</action>
+	<action path="/damned-info.html">		
+		<role name="damned"/>
+	</action>
+	<!-- for all -->	
+	<action path="/login.html">
+		<role name="guest"/>
+		<role name="damned"/>
+		<role name="user"/>
+		<role name="admin"/>
+	</action>
+	<action path="/main.html">
+		<role name="user"/>
+		<role name="damned"/>
+		<role name="admin"/>
+		<role name="guest"/>
+	</action>
+	<action path="/public-room.html">
+		<role name="user"/>
+		<role name="damned"/>
+		<role name="admin"/>
+		<role name="guest"/>
+	</action>
+
+	<!-- for admin -->	
+	<action path="/edit-user.html">
+		<role name="admin"/>
+	</action>
+	<action path="/kill-user.html">
+		<role name="admin"/>
+	</action>
+	
+	<!-- for damned -->
+	<action path="/user-room.html">
+		<role name="damned"/>
+		<role name="user"/>
+		<role name="admin"/>
+	</action>
+	<action path="/logout.html">
+		<role name="damned"/>
+		<role name="user"/>
+		<role name="admin"/>
+	</action>
+	
+	<!-- uses in ifAuth tag -->
+	<action path="guest">
+		<role name="guest"/>
+	</action>
+	<action path="user">
+		<role name="user"/>
+		<role name="admin"/>
+	</action>
+	<action path="admin">
+		<role name="admin"/>
+	</action>
+	<action path="damned">
+		<role name="damned"/>
+	</action>
+		
+	<other-actions>
+		<role name="user"/>
+		<role name="admin"/>
+	</other-actions>	
+</map>

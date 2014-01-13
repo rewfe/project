@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+
+H1 {
+	font-family: Tahoma, Arial, sans-serif;
+	color: white;
+	background-color: #525D76;
+	font-size: 22px;
+}
+
+H2 {
+	font-family: Tahoma, Arial, sans-serif;
+	color: white;
+	background-color: #00ffff;
+	font-size: 16px;
+}
+
+H3 {
+	font-family: Tahoma, Arial, sans-serif;
+	color: white;
+	background-color: #525D76;
+	font-size: 14px;
+}
+
+BODY {
+	font-family: Tahoma, Arial, sans-serif;
+	color: #E8EBF0;
+	background-color: white;
+}
+
+B {
+	font-family: Tahoma, Arial, sans-serif;
+	color: white;
+	background-color: #525D76;
+}
+
+P {
+	font-family: Tahoma, Arial, sans-serif;
+	background: white;
+	color: #E8EBF0;
+	font-size: 12px;
+}
+
+A {
+	color: #E8EBF0;
+}
+
+A.name {
+	color: #E8EBF0;
+}
+
+HR {
+	color: #E8EBF0;
+}
